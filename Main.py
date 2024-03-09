@@ -1,7 +1,7 @@
 import random
 
 #Read the Highscore File to record the Old Highscore
-f = open("Test.txt", "r+")
+f = open("Highscore.txt", "r")
 old_Highscore = f.read()
 f.close()
 
@@ -73,7 +73,7 @@ Score = 0
 #Def to write the new Highscore into the file !!! If the Score is better !!!
 def Bestscore():
     global old_Highscore
-    f = open("Test.txt", "w")
+    f = open("Highscore.txt", "w")
     if int(old_Highscore) <= Score:
         f.write(str(Score))
     else:
