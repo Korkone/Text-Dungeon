@@ -70,6 +70,35 @@ Type3 = None
 Encounter = None
 Score = 0
 
+#Def thats akts kinda like a starting screen
+
+def start ():
+    global old_Highscore
+    while True:
+        print("Please choose one of the following options! Highscore / Info / Creator / start")
+        eingabe = input("")
+        if eingabe == "Highscore" or eingabe == "highscore":
+            if int(old_Highscore) >= 0:
+                print("There is no Highscore jet!")
+                continue
+            else:
+                print("The Highscore is " + old_Highscore + " rooms")
+                continue
+
+        elif eingabe == "Creator" or eingabe == "creator":
+            print("This game was created by Pascal Schmid to further learn the basics of Phyton")
+            continue
+        elif eingabe == "Info" or eingabe == "info":
+            print("This is a text based simple dungeon crawler. you can enter rooms and destroy random enemys to get loot that helps you getting further into the dungeon!")
+            continue
+        elif eingabe == "start" or eingabe == "Start":
+            break
+        else:
+            print("Thats not an Option")
+            continue
+
+
+
 #Def to write the new Highscore into the file !!! If the Score is better !!!
 def Bestscore():
     global old_Highscore
@@ -143,6 +172,7 @@ def Kampfverlauf():
         EnemyDifficulty()
 
 if __name__ == "__main__":
+    start()
     Kampfverlauf()
     Bestscore()
 
