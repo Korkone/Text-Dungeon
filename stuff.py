@@ -5,7 +5,7 @@ Player_HP = 0
 Player_Name = "Peter"
 def Fight_Stop():
     if Enemy_HP1 <= 0 and Enemy_HP2 <= 0 and Enemy_HP3 <= 0:
-        print("Nice job onward to the next Dungeon")
+        print("Nice job onward to the next Room")
     elif Player_HP <=0:
         print("Game Over")
         print("Thanks for Playing " + Player_Name + " maybe you can get further next try.")
