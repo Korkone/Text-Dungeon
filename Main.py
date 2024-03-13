@@ -1,5 +1,5 @@
 import random
-
+import stuff
 #Read the Highscore File to record the Old Highscore
 f = open("Highscore.txt", "r")
 old_Highscore = f.read()
@@ -68,8 +68,8 @@ Type1 = None
 Type2 = None
 Type3 = None
 Encounter = None
-Score = 0
-
+Score = 5
+Player_Class = "none"
 #Def thats akts kinda like a starting screen
 
 def start ():
@@ -160,7 +160,7 @@ def Loot():
 def breakloop():
     answere = input("Do you wana continue the Dungeon? y/n: ")
 
-    if answere == "n":
+    if answere == "n" or answere == "N":
         return False
     else:
         return True
@@ -171,11 +171,25 @@ def Kampfverlauf():
 
         EnemyDifficulty()
 
+# This Lets the player Choos his Name
+def Player_set_name():
+    global Player_Class
+    stuff.Player_Name = str(input("Pleas type in your Name: "))
+    print("Welcome to the Dungeon " + stuff.Player_Name + " lets get you started with a Class !")
+
+#The Player chosses a class here or can get info about the Class
+def Player_set_Class():
+    global Player_Class
+    Player_Class = input("Waht Class do you wana Play ? Warrior / Wizzard / Thief: ")
+
 if __name__ == "__main__":
     start()
+    Player_set_name()
+    Player_set_Class()
     Kampfverlauf()
+    stuff.Fight_Stop()
     Bestscore()
 
 
 else:
-    print("")
+    ...
