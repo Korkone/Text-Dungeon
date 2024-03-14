@@ -114,7 +114,7 @@ end = True
 def start ():
     global old_Highscore
     global end
-    while True:
+    while end == True:
         print("Please choose one of the following options! Highscore / Info / Creator / start")
         eingabe = input("")
         if eingabe == "Highscore" or eingabe == "highscore":
@@ -216,7 +216,7 @@ def breakloop():
         return True
 #Starting to creat the Players Turn so the player can use wahtever he wants in his turn
 def Player_Turn():
-    while True:
+    while end == True:
         Player_Aktion = input("It´s your Turn ! Waht do you wana do? Attack / Item / Cast Spell:")
         if Player_Aktion == "Item" or Player_Aktion == "item":
             Choice = input("Waht item do you wana use ? you have Following items(Heal potion / Rusty Sword)")
@@ -252,15 +252,16 @@ def Kampfverlauf():
 
 # This Lets the player Choos his Name
 def Player_set_name():
-    global Player_Class
-    stuff.Player_Name = str(input("Pleas type in your Name: "))
-    print("Welcome to the Dungeon " + stuff.Player_Name + " lets get you started with a Class !")
-    print("")
+    if end == True:
+        global Player_Class
+        stuff.Player_Name = str(input("Pleas type in your Name: "))
+        print("Welcome to the Dungeon " + stuff.Player_Name + " lets get you started with a Class !")
+        print("")
 
 #The Player chosses a class here or can get info about the Class also fills out the Player_Class_Choice list with all the classes Attributes
 def Player_set_Class():
     global Player_Class
-    while True:
+    while end == True:
         Player_Class = input("you can choos betwenn 3 Classes Warrior/Mage/Rogue if you Wana get some info first Type info: ")
         print("")
         if Player_Class == "Warrior" or Player_Class == "warrior":
@@ -312,16 +313,21 @@ def Player_set_Class():
 
 
 if __name__ == "__main__":
+    load_Score()
+    start()
+    Player_set_name()
+    Player_set_Class()
 
     while end == True:
-        load_Score()
-        start()
-        Player_set_name()
-        Player_set_Class()
+        #Room Choice
+        #Room Randomiser (Based of the choosen room something like (Blue door is magic loot and magic enemys or changes like that)
+        #Load enemys / Show the Player the Curent Hp of every enemy and who it is (Keep it simple)
+        #Turn Order
         Player_Turn()
         Kampfverlauf()
         stuff.game_Stop()
-        Bestscore()
+
+    Bestscore()
     print("Thanks for Playing " + stuff.Player_Name + " maybe you can get further next try. you managed to clear " + str(Score) + " rooms.")
 
 
