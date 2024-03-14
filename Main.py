@@ -1,5 +1,6 @@
 import random
 import stuff
+
 #Read the Highscore File to record the Old Highscore
 def load_Score():
     global old_Highscore
@@ -106,11 +107,13 @@ Type3 = None
 Encounter = None
 Score = 4
 Player_Class = "none"
+end = True
 
 #Def thats akts kinda like a starting screen
 
 def start ():
     global old_Highscore
+    global end
     while True:
         print("Please choose one of the following options! Highscore / Info / Creator / start")
         eingabe = input("")
@@ -135,11 +138,15 @@ def start ():
         elif eingabe == "start" or eingabe == "Start":
             print("")
             break
+
+        elif eingabe == "End" or eingabe == "end":
+            end = False
+            return
+
         else:
             print("Thats not an Option")
             print("")
             continue
-
 
 
 #Def to write the new Highscore into the file !!! If the Score is better !!!
@@ -207,6 +214,35 @@ def breakloop():
         return False
     else:
         return True
+#Starting to creat the Players Turn so the player can use wahtever he wants in his turn
+def Player_Turn():
+    while True:
+        Player_Aktion = input("It´s your Turn ! Waht do you wana do? Attack / Item / Cast Spell:")
+        if Player_Aktion == "Item" or Player_Aktion == "item":
+            Choice = input("Waht item do you wana use ? you have Following items(Heal potion / Rusty Sword)")
+            if Choice == "Heal potion" or Choice == "heal potion" or Choice == "heal Potion" or Choice == "Heal Potion":
+                if stuff.Player_HP == Player_Class_Choice[2]:
+                    print("Your HP is already full !")
+                    continue
+                else:
+                    healpotion(40)
+                    return False
+            else:
+                print("You dont have that Item")
+                continue
+        elif Player_Aktion == "Attack" or Player_Aktion == "attack":
+            print("you attack the monster")
+            break
+        else:
+            print("That´s not an option")
+            continue
+#The use of Healpotions addits to the Player HP but not over the Maximum
+def healpotion(x):
+    if stuff.Player_HP < Player_Class_Choice[2]:
+        stuff.Player_HP += x
+        print("Your HP is now on " + str(stuff.Player_HP))
+        if stuff.Player_HP > Player_Class_Choice[2]:
+            stuff.Player_HP = Player_Class_Choice[2]
 
 
 def Kampfverlauf():
@@ -235,6 +271,7 @@ def Player_set_Class():
             Player_Class_Choice[5] = Warrior.Weakness2
             Player_Class_Choice[6] = Warrior.Resistance1
             Player_Class_Choice[7] = Warrior.Resistance2
+            stuff.Player_HP = Player_Class_Choice[2]
             print("A Warrior ! good choice, now lets get Started!")
             print("")
             break
@@ -246,6 +283,7 @@ def Player_set_Class():
             Player_Class_Choice[5] = Mage.Weakness2
             Player_Class_Choice[6] = Mage.Resistance1
             Player_Class_Choice[7] = Mage.Resistance2
+            stuff.Player_HP = Player_Class_Choice[2]
             print("A Mage ! good choice, now lets get Started!")
             print("")
             break
@@ -257,6 +295,7 @@ def Player_set_Class():
             Player_Class_Choice[5] = Rogue.Weakness2
             Player_Class_Choice[6] = Rogue.Resistance1
             Player_Class_Choice[7] = Rogue.Resistance2
+            stuff.Player_HP = Player_Class_Choice[2]
             print("A Rogue! good choice, now lets get Started!")
             print("")
             break
@@ -271,14 +310,19 @@ def Player_set_Class():
             continue
 
 
+
 if __name__ == "__main__":
-    load_Score()
-    start()
-    Player_set_name()
-    Player_set_Class()
-    Kampfverlauf()
-    stuff.Fight_Stop()
-    Bestscore()
+
+    while end == True:
+        load_Score()
+        start()
+        Player_set_name()
+        Player_set_Class()
+        Player_Turn()
+        Kampfverlauf()
+        stuff.game_Stop()
+        Bestscore()
+    print("Thanks for Playing " + stuff.Player_Name + " maybe you can get further next try. you managed to clear " + str(Score) + " rooms.")
 
 
 else:
